@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
@@ -7,7 +7,6 @@ import {
 import FormInput from "../form-input/FormInput";
 import Button from "../button/Button";
 import "./Sign-in-form.styles.scss";
-import { UserContext } from "../../contexts/userContext";
 
 const defaultFormFields = {
   email: "",
@@ -15,8 +14,6 @@ const defaultFormFields = {
 };
 
 const SignInFrom = () => {
-  const { setCurrentUser } = useContext(UserContext);
-
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { email, password } = formFields;
@@ -32,6 +29,8 @@ const SignInFrom = () => {
 
     try {
       await signInAuthUserWithEmailAndPassword(email, password);
+
+      // setCurrentUser(user);
       setFormFields(defaultFormFields);
     } catch (error) {
       if (error.code === "auth/user-not-found") {
@@ -45,10 +44,7 @@ const SignInFrom = () => {
   };
 
   const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    setCurrentUser(user);
-
-    createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   return (
