@@ -33,7 +33,7 @@ const SignInFrom = () => {
       setFormFields(defaultFormFields);
     } catch (error) {
       if (error.code === "auth/user-not-found") {
-        alert("Cannot find user, please check your ");
+        alert("Cannot find user, please check your email");
       } else if (error.code === "auth/wrong-password") {
         alert("incorrect password for email");
       } else {
