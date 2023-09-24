@@ -85,19 +85,19 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
 
-export const addCollectionAndDocuments = async function(collectionKey, objectsToAdd) {
-  const collectionRef = collection(db, collectionKey)
+// export const addCollectionAndDocuments = async function(collectionKey, objectsToAdd) {
+//   const collectionRef = collection(db, collectionKey)
 
-  const batch = writeBatch(db)
+//   const batch = writeBatch(db)
 
-  objectsToAdd.forEach(object => {
-    const docRef = doc(collectionRef, object.title.toLowerCase())
-    batch.set(docRef, object)
-  });
+//   objectsToAdd.forEach(object => {
+//     const docRef = doc(collectionRef, object.title.toLowerCase())
+//     batch.set(docRef, object)
+//   });
 
-  await batch.commit()
-  console.log('done')
-};
+//   await batch.commit()
+//   console.log('done')
+// };
 
 export const getCategoriesAndDocuments = async function () {
   const collectionRef = collection(db, 'categories')
